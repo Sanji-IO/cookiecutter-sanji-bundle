@@ -1,0 +1,11 @@
+{
+    "full_name": "Your name",
+    "email": "Your address email (eq. you@example.com)",
+    "project_name": "example",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "project_short_description": "A short description of the project",
+    "version": "0.1.0",
+    "license": "MIT",
+    "resource_methods": "get, put",
+    "resource_uri": "/example/resource"
+}

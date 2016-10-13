@@ -1,0 +1,23 @@
+{
+  "name": "{{cookiecutter.project_slug}}",
+  "version": "0.0.1",
+  "author": "{{cookiecutter.full_name}}",
+  "email": "{{cookiecutter.email}}",
+  "description": "{{cookiecutter.project_short_description}}",
+  "license": "{{cookiecutter.license}}",
+  "main": "index.py",
+  "argument": "",
+  "priority": 50,
+  "concurrent": false,
+  "hook": [],
+  "dependencies": {},
+  "repository": "",
+  "role": "model",
+  "ttl": 60,
+  "resources": [
+    {
+      "methods": ["{{cookiecutter.resource_methods.split(',') | map('trim') | join('", "')}}"],
+      "resource": "{{cookiecutter.resource_uri}}"
+    }
+  ]
+}
