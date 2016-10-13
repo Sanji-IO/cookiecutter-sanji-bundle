@@ -9,4 +9,4 @@ Install `cookiecutter` command line: `pip install cookiecutter`
 
 Usage
 -----
-Generate a new Cookiecutter template layout: `cookiecutter gh:Sanji-IO/Â`
+Generate a new Cookiecutter template layout: `cookiecutter gh:Sanji-IO/cookiecutter-sanji-bundle
