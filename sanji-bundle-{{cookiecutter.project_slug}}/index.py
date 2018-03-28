@@ -1,43 +1,47 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import os
 import logging
-from sanji.core import Sanji
+
 from sanji.core import Route
-from sanji.model_initiator import ModelInitiator
-from sanji.connection.mqtt import Mqtt
+from sanji.core import Sanji
+
+from {{cookiecutter.project_slug}}.{{cookiecutter.project_slug}} import {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}
 
 
-_logger = logging.getLogger("sanji.{{ cookiecutter.project_name.lower().replace(' ', '_') }}")
+_logger = logging.getLogger("sanji.{{cookiecutter.project_slug}}")
 
 
 class Index(Sanji):
 
     def init(self, *args, **kwargs):
-        self.path_root = os.path.abspath(os.path.dirname(__file__))
-        self.model = ModelInitiator("{{ cookiecutter.project_name.lower().replace(' ', '_') }}", self.path_root)
-
+        self.{{cookiecutter.project_slug}} = {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}()
 {% if 'get' in cookiecutter.resource_methods %}
-    @Route(methods="get", resource="{{ cookiecutter.resource_uri }}")
-    def _get(self, message, response):
-        return response(data=self.model.db)
-{% endif %}
+    @Route(methods="get", resource="{{cookiecutter.resource_endpoint}}")
+    def get(self, message, response):
+        return response(data=self.{{cookiecutter.project_slug}}.get())
+{%- endif %}
 {% if 'put' in cookiecutter.resource_methods %}
-    @Route(methods="put", resource="{{ cookiecutter.resource_uri }}")
-    def _put(self, message, response):
+    @Route(
+        methods="put",
+        resource="{{cookiecutter.resource_endpoint}}",
+        schema={{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}.PUT_SCHEMA)
+    def put(self, message, response):
         try:
-            self.model.db = message.data
-            self.model.save_db()
+            self.{{cookiecutter.project_slug}}.put(message.data)
         except Exception as e:
             return response(code=400, data={"message": e.message})
 
         return response(data=message.data)
-{% endif %}
+{%- endif %}
 
-if __name__ == '__main__':
-    FORMAT = '%(asctime)s - %(levelname)s - %(lineno)s - %(message)s'
+
+if __name__ == "__main__":
+    from sanji.connection.mqtt import Mqtt
+
+    FORMAT = "%(asctime)s - %(levelname)s - %(lineno)s - %(message)s"
     logging.basicConfig(level=0, format=FORMAT)
-    logging.getLogger("sh").setLevel(logging.WARN)
+    _logger = logging.getLogger("sanji.{{cookiecutter.project_slug}}")
+
     index = Index(connection=Mqtt())
     index.start()

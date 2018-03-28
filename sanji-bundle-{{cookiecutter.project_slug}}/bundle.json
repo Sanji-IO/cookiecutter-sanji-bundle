@@ -1,14 +1,13 @@
 {
   "name": "{{cookiecutter.project_slug}}",
-  "version": "0.0.1",
-  "author": "{{cookiecutter.full_name}}",
+  "version": "{{cookiecutter.version}}",
+  "author": "{{cookiecutter.author}}",
   "email": "{{cookiecutter.email}}",
   "description": "{{cookiecutter.project_short_description}}",
-  "license": "{{cookiecutter.license}}",
+  "license": "MOXA",
   "main": "index.py",
   "argument": "",
-  "priority": 50,
-  "concurrent": false,
+  "priority": 20,
   "hook": [],
   "dependencies": {},
   "repository": "",
@@ -17,7 +16,7 @@
   "resources": [
     {
       "methods": ["{{cookiecutter.resource_methods.split(',') | map('trim') | join('", "')}}"],
-      "resource": "{{cookiecutter.resource_uri}}"
+      "resource": "{{cookiecutter.resource_endpoint}}"
     }
   ]
 }
