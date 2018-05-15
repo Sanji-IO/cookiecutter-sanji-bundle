@@ -1,0 +1,74 @@
+swagger: '2.0'
+info:
+  title: {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}} API
+  description: {{cookiecutter.project_short_description}}
+  version: {{cookiecutter.version}}
+
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+paths:
+  {{cookiecutter.resource_endpoint}}:
+{%- if 'get' in cookiecutter.resource_methods %}
+    get:
+      description: |
+        Get {{cookiecutter.project_name}} setting
+      responses:
+        200:
+          description: |
+            {{cookiecutter.project_name}} setting
+          schema:
+            $ref: '#/definitions/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+              }
+            }
+{%- endif %}
+{%- if 'put' in cookiecutter.resource_methods %}
+    put:
+      description: |
+        Update {{cookiecutter.project_name}} setting
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+      responses:
+        200:
+          description: |
+            {{cookiecutter.project_name}} setting
+          schema:
+            $ref: '#/definitions/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+              }
+            }
+{%- endif %}
+
+definitions:
+  {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting:
+    title: {{cookiecutter.project_name}} Settings
+    required:
+    - enable
+    properties:
+      enable:
+        type: boolean
+        description: |
+          Enable {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}
+    example:
+          $ref: '#/externalDocs/x-mocks/{{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting'
+
+externalDocs:
+  url: 'http://#'
+  x-mocks:
+    {{cookiecutter.project_slug[0].upper()+cookiecutter.project_slug[1:]}}Setting:
+      {
+        "enable": false
+      }

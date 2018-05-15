@@ -1,5 +1,3 @@
 {
-	"field1": "value of field1",
-	"field2": "value of field2",
-	"field3": "value of field3"
+  "enable": false
 }
