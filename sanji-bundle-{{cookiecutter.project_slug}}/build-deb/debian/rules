@@ -24,4 +24,4 @@ override_dh_auto_install:
 	dh_auto_install
 	mkdir -p $(DEB_PYPDIR)
 	cp -a requirements.txt $(DEB_PYPDIR)
-	pip install -r requirements.txt --download $(DEB_PYPDIR)
+	pip download -r requirements.txt -d $(DEB_PYPDIR)
