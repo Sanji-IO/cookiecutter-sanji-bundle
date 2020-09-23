@@ -1,4 +1,4 @@
-Sanji bundle enerator
+Sanji bundle generator
 =====================
 
 Generator for Sanji bundle

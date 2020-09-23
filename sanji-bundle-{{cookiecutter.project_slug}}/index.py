@@ -30,7 +30,7 @@ class Index(Sanji):
         try:
             self.{{cookiecutter.project_slug}}.put(message.data)
         except Exception as e:
-            return response(code=400, data={"message": e.message})
+            return response(code=400, data={"message": str(e)})
 
         return response(data=message.data)
 {%- endif %}
